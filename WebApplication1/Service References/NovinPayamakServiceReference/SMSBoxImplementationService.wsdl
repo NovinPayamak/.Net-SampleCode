@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns="http://SMSBox.gateway.webservice.sspk.co.ir/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" name="SMSBoxImplementationService" targetNamespace="http://SMSBox.gateway.webservice.sspk.co.ir/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://SMSBox.gateway.webservice.sspk.co.ir/">
+      <s:element name="Send">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Auth" type="tns:Auth" />
+            <s:element minOccurs="1" maxOccurs="1" name="Recipients" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="Message" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="Flash" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="DateTime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckCredit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Auth" type="tns:Auth" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckCreditResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Credit" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MessageStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Auth" type="tns:Auth" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MessageStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Info" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Inbox">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Auth" type="tns:Auth" />
+            <s:element minOccurs="1" maxOccurs="1" name="Conditions" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InboxResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="List" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDateTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CurrentDateTime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="unbounded" name="string" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Auth">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="number" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="pass" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendSoapIn">
+    <wsdl:part name="parameters" element="tns:Send" />
+  </wsdl:message>
+  <wsdl:message name="SendSoapOut">
+    <wsdl:part name="parameters" element="tns:SendResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckCreditSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckCredit" />
+  </wsdl:message>
+  <wsdl:message name="CheckCreditSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckCreditResponse" />
+  </wsdl:message>
+  <wsdl:message name="MessageStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:MessageStatus" />
+  </wsdl:message>
+  <wsdl:message name="MessageStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:MessageStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="InboxSoapIn">
+    <wsdl:part name="parameters" element="tns:Inbox" />
+  </wsdl:message>
+  <wsdl:message name="InboxSoapOut">
+    <wsdl:part name="parameters" element="tns:InboxResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDateTimeSoapIn" />
+  <wsdl:message name="GetDateTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SMSBoxImplementationServicePortType">
+    <wsdl:operation name="Send">
+      <wsdl:input message="tns:SendSoapIn" />
+      <wsdl:output message="tns:SendSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCredit">
+      <wsdl:input message="tns:CheckCreditSoapIn" />
+      <wsdl:output message="tns:CheckCreditSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageStatus">
+      <wsdl:input message="tns:MessageStatusSoapIn" />
+      <wsdl:output message="tns:MessageStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Inbox">
+      <wsdl:input message="tns:InboxSoapIn" />
+      <wsdl:output message="tns:InboxSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <wsdl:input message="tns:GetDateTimeSoapIn" />
+      <wsdl:output message="tns:GetDateTimeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SMSBoxImplementationServiceBinding" type="tns:SMSBoxImplementationServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Send">
+      <wsdl:documentation>Send batch SMS by using this method</wsdl:documentation>
+      <soap:operation soapAction="#Send" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCredit">
+      <wsdl:documentation>Check gateway credit by using this method</wsdl:documentation>
+      <soap:operation soapAction="#CheckCredit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MessageStatus">
+      <wsdl:documentation>Check Message delivery status</wsdl:documentation>
+      <soap:operation soapAction="#MessageStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Inbox">
+      <wsdl:documentation>Get list of received Messages</wsdl:documentation>
+      <soap:operation soapAction="#Inbox" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <wsdl:documentation>Get DateTime of SMSBox Server</wsdl:documentation>
+      <soap:operation soapAction="#GetDateTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SMSBoxImplementationService">
+    <wsdl:port name="SMSBoxImplementationServicePort" binding="tns:SMSBoxImplementationServiceBinding">
+      <soap:address location="http://novinpayamak.com/services/SMSBox/service" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
